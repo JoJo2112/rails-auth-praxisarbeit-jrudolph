@@ -82,6 +82,7 @@ GEM
       msgpack (~> 1.2)
     brakeman (6.2.1)
       racc
+    browser (6.0.0)
     builder (3.3.0)
     capybara (3.40.0)
       addressable
@@ -198,6 +199,11 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    rails_performance (1.2.2)
+      browser
+      railties
+      redis
+      redis-namespace
     railties (7.2.1)
       actionpack (= 7.2.1)
       activesupport (= 7.2.1)
@@ -210,6 +216,12 @@ GEM
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
+    redis (5.3.0)
+      redis-client (>= 0.22.0)
+    redis-client (0.22.2)
+      connection_pool
+    redis-namespace (1.11.0)
+      redis (>= 4)
     regexp_parser (2.9.2)
     reline (0.5.10)
       io-console (~> 0.5)
@@ -306,7 +318,7 @@ PLATFORMS
   arm-linux
   arm-linux-gnu
   arm-linux-musl
-  arm64-darwin
+  arm64-darwin-23
   x86-linux
   x86-linux-gnu
   x86-linux-musl
@@ -324,6 +336,7 @@ DEPENDENCIES
   jbuilder
   puma (>= 5.0)
   rails (~> 7.2.1)
+  rails_performance (~> 1.2)
   rubocop-rails-omakase
   selenium-webdriver
   sprockets-rails
