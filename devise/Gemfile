@@ -57,4 +57,3 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
-gem "benchmark-ips", group: [ :development, :test ]

@@ -3,7 +3,7 @@ require "sequel/core"
 class RodauthMain < Rodauth::Rails::Auth
   configure do
     # List of authentication features that are loaded.
-    enable :create_account, :verify_account, :verify_account_grace_period,
+    enable :create_account,
       :login, :logout, :remember,
       :reset_password, :change_password, :change_login, :verify_login_change,
       :close_account
@@ -34,6 +34,7 @@ class RodauthMain < Rodauth::Rails::Auth
     # Specify the controller used for view rendering, CSRF, and callbacks.
     rails_controller { RodauthController }
 
+
     # Make built-in page titles accessible in your views via an instance variable.
     title_instance_variable :@page_title
 
@@ -42,9 +43,6 @@ class RodauthMain < Rodauth::Rails::Auth
 
     # Store password hash in a column instead of a separate table.
     account_password_hash_column :password_hash
-
-    # Set password when creating account instead of when verifying.
-    verify_account_set_password? false
 
     # Change some default param keys.
     login_param "email"
@@ -67,7 +65,6 @@ class RodauthMain < Rodauth::Rails::Auth
     # ==> Emails
     send_email do |email|
       # queue email delivery on the mailer after the transaction commits
-      db.after_commit { email.deliver_later }
     end
 
     # ==> Flash
@@ -133,9 +130,6 @@ class RodauthMain < Rodauth::Rails::Auth
     # ==> Redirects
     # Redirect to home page after logout.
     logout_redirect "/"
-
-    # Redirect to wherever login redirects to after account verification.
-    verify_account_redirect { login_redirect }
 
     # Redirect to login page after password reset.
     reset_password_redirect { login_path }

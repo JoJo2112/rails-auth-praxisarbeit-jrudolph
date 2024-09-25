@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
+  skip_before_action :verify_authenticity_token
 
   private
     def current_user_session

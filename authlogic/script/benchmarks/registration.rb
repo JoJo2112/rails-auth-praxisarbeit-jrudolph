@@ -16,6 +16,7 @@ num_users.times do |i|
   time = Benchmark.measure do
     # Verwenden von `Net::HTTP.post_form` zur Registrierung des Benutzers
     res = Net::HTTP.post_form(uri, {
+      'user[login]' => "testuser#{i}",
       'user[email]' => email,
       'user[password]' => 'password1234',
       'user[password_confirmation]' => 'password1234'

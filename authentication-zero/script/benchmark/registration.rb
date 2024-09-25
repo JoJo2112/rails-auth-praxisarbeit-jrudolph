@@ -7,7 +7,7 @@ require_relative "../../config/environment"
 num_users = 100
 total_time = 0.0
 
-uri = URI.parse("http://localhost:3000/users")
+uri = URI.parse("http://localhost:3000/sign_up")
 
 num_users.times do |i|
   email = "testuser#{i}@example.com"
@@ -16,9 +16,9 @@ num_users.times do |i|
   time = Benchmark.measure do
     # Verwenden von `Net::HTTP.post_form` zur Registrierung des Benutzers
     res = Net::HTTP.post_form(uri, {
-      'user[email]' => email,
-      'user[password]' => 'password1234',
-      'user[password_confirmation]' => 'password1234'
+      'email' => email,
+      'password' => 'password1234',
+      'password_confirmation' => 'password1234'
     })
 
 
@@ -38,4 +38,4 @@ end
 
 avg_time = total_time / num_users
 puts "Gesamte Zeit für die Registrierung von #{num_users} Nutzern: #{total_time} Sekunden"
-puts "Durchschnittliche Zeit für die Registrierung pro Nutzer: #{avg_time} Sekunden"
+puts "Durchschnittliche Zeit für die Registrierung eines Nutzers: #{avg_time} Sekunden"

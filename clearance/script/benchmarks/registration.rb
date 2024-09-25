@@ -17,8 +17,7 @@ num_users.times do |i|
     # Verwenden von `Net::HTTP.post_form` zur Registrierung des Benutzers
     res = Net::HTTP.post_form(uri, {
       'user[email]' => email,
-      'user[password]' => 'password1234',
-      'user[password_confirmation]' => 'password1234'
+      'user[password]' => 'password1234'
     })
 
 
@@ -38,4 +37,4 @@ end
 
 avg_time = total_time / num_users
 puts "Gesamte Zeit für die Registrierung von #{num_users} Nutzern: #{total_time} Sekunden"
-puts "Durchschnittliche Zeit für die Registrierung pro Nutzer: #{avg_time} Sekunden"
+puts "Durchschnittliche Zeit für die Registrierung eines Nutzers: #{avg_time} Sekunden"

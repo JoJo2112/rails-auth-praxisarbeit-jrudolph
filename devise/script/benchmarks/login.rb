@@ -7,25 +7,23 @@ require_relative "../../config/environment"
 num_users = 100
 total_time = 0.0
 
-uri = URI.parse("http://localhost:3000/users")
+uri = URI.parse("http://localhost:3000/users/sign_in")
 
 num_users.times do |i|
-  email = "testuser#{i}@example.com"
-
   # Messen der Zeit für die Registrierung jedes Benutzers
   time = Benchmark.measure do
     # Verwenden von `Net::HTTP.post_form` zur Registrierung des Benutzers
     res = Net::HTTP.post_form(uri, {
-      'user[email]' => email,
+      'user[email]' => "testuser1@example.com",
       'user[password]' => 'password1234',
-      'user[password_confirmation]' => 'password1234'
+      'user[remember_me]' => 0
     })
 
 
     # Überprüfen, ob die Registrierung erfolgreich war
     unless res.is_a?(Net::HTTPRedirection)
-      puts "Fehler bei der Registrierung von Benutzer #{i}: #{res.body}"
-      raise "Fehler bei der Registrierung: #{res.body}"
+      puts "Fehler beim Login von Benutzer #{i}: #{res.body}"
+      raise "Fehler beim Login: #{res.body}"
     end
   end
 
@@ -37,5 +35,5 @@ num_users.times do |i|
 end
 
 avg_time = total_time / num_users
-puts "Gesamte Zeit für die Registrierung von #{num_users} Nutzern: #{total_time} Sekunden"
-puts "Durchschnittliche Zeit für die Registrierung pro Nutzer: #{avg_time} Sekunden"
+puts "Gesamte Zeit für das Login von #{num_users} Nutzern: #{total_time} Sekunden"
+puts "Durchschnittliche Zeit für das Login pro Nutzer: #{avg_time} Sekunden"
